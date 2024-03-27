@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" defer></script>
+    
+    <style>
+         button{
+            width: 160px;
+            height: 40px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button onclick="window.history.back()" class="btn btn-outline-primary">Back</button>
+    
+    <script>
+        let array=[]
+        let l=document.getElementsByTagName('div')
+        array=JSON.parse(localStorage.getItem('Array'))
+        display12(array)
+        function display12(array){
+            l[0].innerHTML="";
+            array.map((val,ind,arr)=>{
+            ul1=document.createElement('ul')
+            ul1.style.listStyleType='none'
+            for(x in val){
+                if(x=='image'){
+                    
+                    imgg=document.createElement('img')
+                    imgg.setAttribute('src',val[x]);
+                    imgg.style.width="80%"
+                    imgg.style.height="150px"
+                    //imgg.style.borderTopLeftRadius="60px"
+                    ul1.insertBefore(imgg,ul1.children[0]);
+                }
+                else if(x=='rating'){
+                    li1=document.createElement('li')
+                    li2=document.createElement('li')
+                    li1.innerHTML=`<b>Rating: </b> ${val[x]['rate']}`;
+                    li2.innerHTML=`<b>Count: </b>${val[x]['count']}`
+                    ul1.appendChild(li1);
+                    ul1.appendChild(li2)
+                }
+                else{
+                    li1=document.createElement('li')
+                    li1.innerHTML=`<b>${x}: </b>${val[x]}`;
+                    ul1.appendChild(li1);
+                }
+            }
+            btnRem=document.createElement('button');
+            btnRem.innerHTML="Remove From Cart";
+            btnRem.setAttribute('class','btn btn-outline-warning')
+            btnRem.addEventListener('click',()=>{
+                array.splice(ind,1);
+                window.localStorage.setItem('Array',JSON.stringify(array))
+                display12(array);
+            })
+            btnbuy=document.createElement('button');
+            btnbuy.innerHTML="Buy Now";
+            btnbuy.setAttribute('class','btn btn-outline-success')
+            btnbuy.addEventListener('click',()=>{
+                localStorage.setItem('buy',JSON.stringify(val));
+                window.location.assign('./buy.html')
+            })
+            ul1.appendChild(btnRem)
+            ul1.appendChild(btnbuy)
+            l[0].appendChild(ul1)
+            //ul1.style.backgroundImage="linear-gradient(135deg,pink 6%,white 10%)"
+        ul1.style.width='30%';
+        ul1.style.paddingTop="10px";
+        ul1.style.borderRadius='20px';
+        ul1.style.paddingBottom='10px';
+        ul1.style.paddingRight='10px';
+        ul1.style.wordBreak="break-all";
+        ul1.style.boxShadow='0 8px 16px 0 rgba(0,0,0,0.3)';
+            })
+        }        
+    //})
+
+    l[0].style.display="flex";
+    l[0].style.flexWrap="wrap";
+    l[0].style.justifyContent="space-around"
+    //l[0].style.backgroundColor="rgba(0,0,255,0.1)"
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" defer></script>
+    <style>
+        ul{
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            width: 35%;
+            text-align: left;
+            border-radius: 20px;
+        }
+        button{
+            width: 100px;
+            height: 40px;
+            margin: 10px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <center><ul></ul>
+        Quantity: <input type="number" id="count" value="1" onchange="display()"><br><br>
+        Total Price: <input type="text" id="rate" on><br><br>
+        
+    <button onclick="window.history.back()" class="btn btn-outline-warning" >Back</button><button onclick="window.location.assign('./payment.html')" class="btn btn-outline-success" style="width: fit-content;">Proceed To Pay</button></center>
+</body>
+<script>
+    
+    let k=JSON.parse(localStorage.getItem('buy'))
+    let count=document.getElementById('count');
+    let rate=document.getElementById('rate');
+    rate.value=k['price'].toString()
+    function display(){
+        if(count.value>=1){
+            rate.value=(count.value*k['price']).toString()
+    }
+
+    }
+    let ul1=document.getElementsByTagName('ul')
+    let li1=document.createElement('li')
+    let imgg=document.createElement('img')
+    imgg.setAttribute('src',k['image'])
+    imgg.style.width="80%";
+    imgg.style.height="200px";
+    let li2=document.createElement('li')
+    let li3=document.createElement('li')
+    let li4=document.createElement('li')
+    let li5=document.createElement('li')
+    let li6=document.createElement('li')
+    let li7=document.createElement('li')
+    let li8=document.createElement('li')
+    li2.innerHTML=`<b>Id: </b>${k['id']}`
+    li3.innerHTML=`<b>Title: </b>${k['title']}`
+    li4.innerHTML=`<b>Price: </b>${k['price']}`
+    li5.innerHTML=`<b>Description: </b>${k['description']}`
+    li6.innerHTML=`<b>Category: </b>${k['category']}`
+        li7.innerHTML=`<b>Rating: </b> ${k['rating']['rate']}`
+        li8.innerHTML=`<b>Count: </b>${k['rating']['count']}`
+    ul1[0].appendChild(imgg)
+    ul1[0].appendChild(li2)
+    ul1[0].appendChild(li3)
+    ul1[0].appendChild(li4)
+    ul1[0].appendChild(li5)
+    ul1[0].appendChild(li6)
+    ul1[0].appendChild(li7)
+    ul1[0].appendChild(li8)
+    ul1[0].style.listStyleType='none'
+</script>
+</html>
